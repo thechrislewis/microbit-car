@@ -2,7 +2,9 @@
 # This is a tutorial to teach python classes by creating a program to control a robot car.
 # the car is able to move forward, backward, turn left, turn right, and stop.
 # two motors power the wheels. The motors are in counterpoised directions.
-# The left motor needs to run forward to move the car forward, while the right motor needs to run backward.
+# The left motor needs to run forward to move the car forward, 
+# while the right motor needs to run backward.
+
 # left motor is on pin2 and right motor is on pin1
 # Using bbc microbit code editor https://python.microbit.org/v/2.0
 
@@ -13,12 +15,12 @@ A CLASS is a 'thing' you define in software.
 An OBJECT is an instance of the class. 
 eg. A Car class is a blueprint for creating Car objects.
 
-Let's look at the Car class as an example.
+Let's look at a Car class as an example.
 
 A Car class is defined by attributes (eg. things the Car possess - number of wheels, colour, make, max speed etc.)
 A Car class has METHODS (functions) that allows the object to operate (eg. cars start, stop, drive, turn, reverse etc.)
 
-OBJECTS in python are created ("instantiated") by assigning a variable to the CLASS
+OBJECTS in python are instantiated ("created") by assigning a variable to the CLASS name followed by parentheses.
 
 Classes in python are capitalised by convention. eg. Car, Motor, Robot etc.
 Classes can contain other classes as attributes eg. a Car class can contain Motor classes as attributes.
@@ -28,7 +30,7 @@ for a Car class
     my_car = Car() - this creates a Car object called my_car
     red_car = Car(colour=red) - this creates a Car object passing the colour red to it.
 
-WE STILL NEED TO DEFINE THE CLASS.
+BUT WE STILL NEED TO DEFINE THE CLASS.
 
 here's an example - use idle or any python editor to run this code
 '''
@@ -40,7 +42,7 @@ class Car:
         self.year = year
         self.colour = colour
 
-    def display_info(self):
+    def get_info(self):
         return f"{self.year} {self.make} {self.model} in {self.colour}"
     
     
@@ -49,29 +51,28 @@ my_car = Car("Toyota", "Corolla", 2020, "Blue")
 your_car = Car("Honda", "Civic", 2019, "Red")
 
 
-# display information about the cars
-print(my_car.display_info())
-print(your_car.display_info())  
+# get information about the cars and print it
+print(my_car.get_info())
+print(your_car.get_info())  
 
-
+#save as car_example.py and run this file to see the output
 
 '''
-the __init__ method is called when the class is instantiated.
+the __init__ method is called when the object is instantiated (created) from the class.
 NOTE the use of 'self' to refer to the object itself.
 
 Now we will create a Motor class to control a single motor using PWM on a given pin.
 
 Our Motor class will have methods to run the motor at a given speed and to stop the motor.
 
-Open a new file and
-Save as motor.py
+Open a new file and Save as motor.py
 '''
 
 
 from microbit import *
 
 class Motor:
-    def __init__(self, motor_pin): # initialize motor with given pin
+    def __init__(self, motor_pin = 1): # initialize motor with given pin - default pin1
         ''' Constructor '''
         
         self.pin = motor_pin
@@ -90,12 +91,15 @@ class Motor:
 
 # code to test class code
 if __name__ == "main":
-    motor = Motor(pin1)
+    
+    motor = Motor(pin1) # create motor object on pin1
 
-    motor.run(1)
-    sleep(1000)
-    motor.stop()
-
+    for i in range(10):
+        motor.run(1) # run motor
+        sleep(1000)
+        motor.stop()
+        sleep(500)
+        
 
 '''
 save as motor.py and test by running this file 
@@ -151,7 +155,6 @@ class Car:
 # Next step is to fill in the methods to make the car move
 
 
-  
       
 from microbit import *   
 import neopixel
